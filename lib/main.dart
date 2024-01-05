@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instawish/components/user_avatar.dart';
 
 void main() {
+  var filename = "avatar.jpg";
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -25,33 +27,61 @@ void main() {
               ),
             ],
             backgroundColor: Colors.cyan[300]),
-        body: Container(
-          height: 100,
-          color: Colors.black12,
-          margin: const EdgeInsets.only(top: 10),
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              for (var i = 0; i < 5; i++)
-                Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          shape: BoxShape.circle),
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: const CircleAvatar(
-                        radius: 35,
-                        backgroundImage: AssetImage("assets/avatar.jpg"),
-                      ),
+        body: Column(
+          children: [
+            Container(
+              height: 100,
+              color: Colors.black12,
+              margin: const EdgeInsets.only(top: 10),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (var i = 0; i < 5; i++)
+                    Column(
+                      children: [
+                        UserAvatar(filename: filename, border: false),
+                        Text("User $i")
+                      ],
                     ),
-                    Text("User $i")
-                  ],
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 500,
+              height: 200,
+              child: Stack(children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.only(top: 10, left: 50),
+                  width: 400,
+                  deco
+                  ration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        blurRadius: 15,
+                        offset: const Offset(0.0, 0.75),
+                      ),
+                    ],
+                    border: Border.all(
+                      color: Colors.grey.shade200,
+                      width: 2,
+                    ),
+                  ),
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 20),
+                      child: const Text("username")),
                 ),
-            ],
-          ),
+                const Positioned(
+                  left: -10,
+                  child: UserAvatar(filename: "avatar.jpg", border: true),
+                ),
+              ]),
+            )
+          ],
         ),
       ),
     ),
